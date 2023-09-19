@@ -1,0 +1,74 @@
+spring:
+  application:
+    name: factory-data-admin
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+
+  resources:
+    static-locations:
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML
+  profiles:
+    active: dev
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 1
+    minIdle: 1
+    maxActive: 50
+    maxWait: 10000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 1
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall
+
+server:
+  port: 8086
+  undertow:
+    uri-encoding: UTF-8
+    accesslog:
+      enabled: true
+      directory: undertowlog/undertow_log
+
+
+##mapper
+mybatis-plus:
+  mapper-locations: 'classpath:mapper/**/*.xml'
+  #实体扫描，多个package用逗号或者分号分隔
+  global-config:
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    field-strategy: 2
+    #驼峰下划线转换
+    db-column-underline: true
+    #刷新mapper 调试神器
+    refresh-mapper: true
+  #    sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+  configuration:
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: partial
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+light:
+  data:
+    schedule-switch: true
+    #获取sqlserver数据的开关
+
+
+    #调光的控制开关
+    schedule-switch: true
+    #洞外一级的亮度差，单位： 坎德拉/m2
+    diff: 200
+
